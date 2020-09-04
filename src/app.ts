@@ -1,11 +1,16 @@
 import express from "express";
+import { ApolloServer, gql } from 'apollo-server-express';
+import  resolvers from "../resolvers";
+import  typeDefs from "../schema";
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-app.get('/',(req,res)=>{
-    res.json({msg:'hello'})
+const server = new ApolloServer({
+    typeDefs,
+    resolvers
 })
 
+server.applyMiddleware({app})
 //TODO console.log not allowed in npm run build
-app.listen(port, () => console.log(`server running on ${port}`));
+app.listen({port}, () => console.log(`server running on ${port}${server.graphqlPath}`));
