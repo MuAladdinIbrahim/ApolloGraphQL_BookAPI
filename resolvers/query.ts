@@ -1,8 +1,10 @@
 module.exports = {
       hello: () => 'Hello world!',
       welcome: ()=> "welcome",
-      book: (parent:any, args:any, { dataSources } :any,info:any)=> {
-          return dataSources.books.getBook(args);
+      book: async (parent:any, {id}:any, { dataSources } :any,info:any)=> {
+          return dataSources.books.getBook(id);
       },
-      author:()=> {}
+      author:(parent:any, {id}:any, { dataSources } :any,info:any)=> {
+          return {name:"muhammad"}
+      }
 };

@@ -2,18 +2,17 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import resolvers from "../resolvers";
 import typeDefs from "../schema";
-import Books from "../datasources/books";
-import { MongoClient } from "mongodb";
+import Books from "../datasources/Books";
+import Book from "./models/book.model"
+import { connect } from "./db"
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const uri = "mongodb+srv://aladdin:aladdin@cluster0.3ydvq.mongodb.net/graphql_events?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true , useUnifiedTopology: true});
-client.connect();
+connect();
 
 const dataSources = () => ({
-  books: new Books(client.db().collection("events")),
+  books: new Books(Book),
 });
 
 const server = new ApolloServer({

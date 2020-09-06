@@ -6,12 +6,14 @@ const typeDefs = gql`
     welcome:String,
     book(
         id:ID
+        price:Float
         title:String
         description: String
     ):Book,
     author:Author,
   }
   type Book {
+      id:ID,
       title:String,
       price:Float,
       description:String
