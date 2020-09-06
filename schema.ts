@@ -21,5 +21,13 @@ const typeDefs = gql`
   type Author {
       name:String
   }
+  input BookInput {
+    title: String!,
+    price:Float,
+    description:String!,
+  }
+  type Mutation {
+    addBook(book: BookInput): Book
+  }
 `;
 export default typeDefs;
